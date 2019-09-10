@@ -1,11 +1,31 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script language="javascript" type="text/javascript" src="script.js"></script>
     </head>
     <body>
-        <h1> Hello Mars!</h1>
+        <div id="chart">
+            <script>
+                $.getJSON('all/temperatures', function(data) {
+                    let temperatureRecords = data['temperatures']
+                    let temperatureDataPoints = []
+                    let timeDataPoints = []
+                    temperatureRecords.forEach( (temperatureRecord, index) => {
+                        timeDataPoints.push(index)
+                        temperatureDataPoints.push(temperatureRecord.temperature)
+                    });
+                    alert(JSON.stringify(temperatureDataPoints))
+                    Plotly.plot('chart', [{
+                    x: timeDataPoints,
+                    y:temperatureDataPoints,
+                    type:'line'
+                }])
+                });
+
+            </script>
+        </div>
     </body>
 </html>
 
