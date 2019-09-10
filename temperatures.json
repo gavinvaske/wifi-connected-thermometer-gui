@@ -1,0 +1,20 @@
+{
+  "temperatures": [
+    {
+      "temperature": 70.5,
+      "timeStamp": 1568098053095
+    },
+    {
+      "temperature": 70.5,
+      "timeStamp": 1568098053620
+    },
+    {
+      "temperature": 70.5,
+      "timeStamp": 1568098056574
+    },
+    {
+      "temperature": 70.5,
+      "timeStamp": 1568098083724
+    }
+  ]
+}
