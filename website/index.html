@@ -9,6 +9,7 @@
         <div id="chart">
             <script>
                 $.getJSON('all/temperatures', function(data) {
+                    document.getElementById('dataPoints').innerHTML = JSON.stringify(data['temperatures'], null, 2);
                     let temperatureRecords = data['temperatures']
                     let temperatureDataPoints = []
                     let timeDataPoints = []
@@ -16,15 +17,17 @@
                         timeDataPoints.push(index)
                         temperatureDataPoints.push(temperatureRecord.temperature)
                     });
-                    alert(JSON.stringify(temperatureDataPoints))
                     Plotly.plot('chart', [{
                     x: timeDataPoints,
                     y:temperatureDataPoints,
                     type:'line'
                 }])
                 });
-
             </script>
+        </div>
+        <div>
+            <h3 style="font-family:Helvetica;"> The data Stored in the database:</h3>
+            <h4 style="color: gray; font-family:Helvetica;" id='dataPoints'> </h4>
         </div>
     </body>
 </html>
