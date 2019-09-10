@@ -1,0 +1,22 @@
+{
+  "name": "wifi-connected-thermometer-gui",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gvwarrior/wifi-connected-thermometer-gui.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gvwarrior/wifi-connected-thermometer-gui/issues"
+  },
+  "homepage": "https://github.com/gvwarrior/wifi-connected-thermometer-gui#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
