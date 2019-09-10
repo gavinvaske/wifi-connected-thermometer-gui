@@ -4,7 +4,7 @@ var app = express()
 app.use(express.static('website'))
 
 // Set Port Number
-var port = 3000
+var port = process.env.PORT || 3000
 
 // Start Listening on Port..
 var server = app.listen(port, function() {
