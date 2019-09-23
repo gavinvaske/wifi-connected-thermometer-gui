@@ -28,8 +28,7 @@ var temperatureTable = JSON.parse(data)
 app.use(require('./routes'))
 
 app.use('/', function(request, response){
-    response.render('index.pug', {root : path.join(__dirname, appViews)})
-    // response.send('I am homepage')
+    response.render('index', {root : path.join(__dirname, appViews)})
 })
 
 app.use((req, resp) => {
