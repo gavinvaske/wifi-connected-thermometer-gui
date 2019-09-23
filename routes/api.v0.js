@@ -62,7 +62,8 @@ router.get('/add/temperature/:temp', (request, response) => {
 // ADD one temperature to the database
 router.post('/temperature', (request, response) => {
     let data = request.params
-    response.send(JSON.stringify(data))
+    let temp = request.body.temp
+    response.send('temp = ' + temp)
     // let minTemperature = 10
     // let maxTemperature = 50
     // let statusCode = 406
