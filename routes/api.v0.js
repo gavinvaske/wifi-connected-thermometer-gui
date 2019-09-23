@@ -95,21 +95,18 @@ router.post('/temperature', (request, response) => {
         statusCode = 406
         message = 'Error: Temperature must be between the ranges 10 -> 50 degress celsius'
     }
-
-    response.send("test: Adding temperature = " + temp + " to the database.")
-
-    // let responseMessage = 
-    // {
-    //     httpStatusCode: statusCode,
-    //     message: message
-    // }
-    // if(statusCode == 202){
-    //     fs.writeFile(temperatureTableFileName, JSON.stringify(temperatureTable, null, 2), function(){
-    //         response.send(responseMessage)
-    //     } ) 
-    // } else{
-    //     response.send(responseMessage)
-    // }
+    let responseMessage = 
+    {
+        httpStatusCode: statusCode,
+        message: message
+    }
+    if(statusCode == 202){
+        fs.writeFile(temperatureTableFileName, JSON.stringify(temperatureTable, null, 2), function(){
+            response.send(responseMessage)
+        } ) 
+    } else{
+        response.send(responseMessage)
+    }
 })
 
 module.exports = router
