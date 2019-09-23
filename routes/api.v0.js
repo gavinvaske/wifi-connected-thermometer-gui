@@ -73,11 +73,11 @@ router.post('/temperature', (request, response) => {
     if(!temp){
         message = "Error: Missing 'temp' body param"
     }
-    // // New Row that will be added to the DB
-    // var temperatureRecord = {
-    //     temperature : temp,
-    //     timeStamp : + new Date()
-    // }
+    // New Row that will be added to the DB
+    var temperatureRecord = {
+        temperature : temp,
+        timeStamp : new Date()
+    }
 
     response.send("Adding temperature = " + temp + " to the database.")
     
