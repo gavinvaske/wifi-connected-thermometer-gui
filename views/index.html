@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <meta charset="UTF-8"/>
+      <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+      <script language="javascript" type="text/javascript" src="script.js"></script>
+  </head>
+  <body>
+    <div class="navbar"><span>Wifi enabled thermometer</span></div>
+    <div class="wrapper">
+        <div id="chart"></div>
+        <script>
+            function drawGraph() {
+                $.getJSON('/api/all/temperatures', function(data) {
+                    // Display Temperatures stored in DB as HTML for development purposes
+                    // document.getElementById('dataPoints').innerHTML = JSON.stringify(data['temperatures'], null, 2);
+                    let temperatureRecords = data['temperatures']
+                    let temperatureDataPoints = []
+                    let timeDataPoints = []
+                    let startIndex = 0
+                    let numDataPoints = temperatureRecords.length
+                    if (numDataPoints > 300) {
+                        startIndex = (numDataPoints - 299)
+                        temperatureRecords = temperatureRecords.slice(startIndex)
+                    }
+                    temperatureRecords.forEach((temperatureRecord, index) => {
+                        timeDataPoints.push(index)
+                        temperatureDataPoints.push(temperatureRecord.temperature)
+                    });
+                    var layout = {
+                        title: 'Tempeature Measurements',
+                        xaxis: {
+                            title: 'Seconds Ago (Seconds)',
+                            range: [0, 300],
+                            showgrid: false,
+                            zeroline: false
+                        },
+                        yaxis: {
+                            title: 'Temperature (Celsius)',
+                            range: [10, 50],
+                            showline: false
+                        }
+                    };
+                    var data = [{
+                        x: timeDataPoints,
+                        y: temperatureDataPoints,
+                        type: 'line'
+                    }];
+                    var graphDiv = document.getElementById('chart')
+                    Plotly.react(graphDiv, data, layout);
+                });
+            }
+            // Redraw Graph every
+            setInterval(function() {
+                drawGraph()
+            }, 1000);
+        </script>
+    </div>
+  </body>
+</html>

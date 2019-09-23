@@ -1,28 +1,88 @@
 {
   "temperatures": [
     {
-      "temperature": 73,
+      "temperature": 38,
       "timeStamp": 1568098053095
     },
     {
-      "temperature": 74,
+      "temperature": 40,
       "timeStamp": 1568098053620
     },
     {
-      "temperature": 74.5,
+      "temperature": 40.5,
       "timeStamp": 1568098056574
     },
     {
-      "temperature": 77,
+      "temperature": 41,
       "timeStamp": 1568098083744
     },
     {
-      "temperature": 82,
+      "temperature": 37,
       "timeStamp": 1568098983724
     },
     {
-      "temperature": 76,
+      "temperature": 36,
       "timeStamp": 1568098983724
+    },
+    {
+      "temperature": 33,
+      "timeStamp": 1568675309330
+    },
+    {
+      "temperature": 49,
+      "timeStamp": 1569264314916
+    },
+    {
+      "temperature": 45,
+      "timeStamp": 1569264322078
+    },
+    {
+      "temperature": 38,
+      "timeStamp": 1569264333707
+    },
+    {
+      "temperature": 22,
+      "timeStamp": 1569264399405
+    },
+    {
+      "temperature": 30,
+      "timeStamp": 1569264403908
+    },
+    {
+      "temperature": 45,
+      "timeStamp": 1569264407705
+    },
+    {
+      "temperature": 17,
+      "timeStamp": 1569264410665
+    },
+    {
+      "temperature": 10,
+      "timeStamp": 1569264412798
+    },
+    {
+      "temperature": 11,
+      "timeStamp": 1569264414347
+    },
+    {
+      "temperature": 17,
+      "timeStamp": 1569264417779
+    },
+    {
+      "temperature": 49,
+      "timeStamp": 1569265150759
+    },
+    {
+      "temperature": 42,
+      "timeStamp": 1569266185355
+    },
+    {
+      "temperature": 42,
+      "timeStamp": 1569266243961
+    },
+    {
+      "temperature": 35,
+      "timeStamp": 1569266477628
     }
   ]
 }

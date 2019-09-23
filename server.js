@@ -1,7 +1,12 @@
-var express = require('express')
-var fs = require('fs')
-var app = express()
-app.use(express.static('website'))
+const express = require('express')
+const path = require('path')
+const fs = require('fs')
+const bodyParser = require('body-parser')
+const app = express()
+app.set('view engine', 'pug')
+app.use(bodyParser.urlencoded({ extended: true }))
+const appViews = 'views'
+app.use(express.static(appViews))
 
 // Set Port Number
 var port = process.env.PORT || 3000
@@ -16,25 +21,17 @@ var temperatureTableFileName = 'temperatures.json'
 var data = fs.readFileSync('temperatures.json')
 var temperatureTable = JSON.parse(data)
 
-// GET all stored temperature readings
-app.get('/all/temperatures', (request, response) => {
-    fs.readFile('temperatures.json', (err, data) => {
-        if (err) throw err;
-        let temps = JSON.parse(data)
-        response.send(temps)
-      })
+// app.get('/', function(request, response){
+//     return response.redirect('')
+// })
+
+app.use(require('./routes'))
+
+app.use('/', function(request, response){
+    response.render('index.pug', {root : path.join(__dirname, appViews)})
+    // response.send('I am homepage')
 })
 
-// ADD one temperature to the database
-app.get('/add/temperature/:temp', (request, response) => {
-    let data = request.params
-    // New Row that will be added to the DB
-    var temperatureRecord = {
-        temperature : Number(data.temp),
-        timeStamp : + new Date()
-    }
-    temperatureTable['temperatures'].push(temperatureRecord)
-    fs.writeFile(temperatureTableFileName, JSON.stringify(temperatureTable, null, 2), function(){
-        response.send('Added ' + temperatureRecord.temperature + " to the database.")
-    } ) 
+app.use((req, resp) => {
+    resp.status(404).send('Unknown request')
 })
