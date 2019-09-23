@@ -2,6 +2,7 @@ const express = require('express')
 const fs = require('fs')
 const router = express.Router()
 const path = require('path')
+const bodyParser = require('body-parser')
 const appViews = 'views'
 
 const baseUrl = __dirname + '/api'
@@ -62,7 +63,7 @@ router.get('/add/temperature/:temp', (request, response) => {
 // ADD one temperature to the database
 router.post('/temperature', (request, response) => {
     let data = request.params
-    let temp = Number(request.body.temp)
+    let temp = request.param('temp')
     response.send('temp = ' + temp)
     // let minTemperature = 10
     // let maxTemperature = 50
