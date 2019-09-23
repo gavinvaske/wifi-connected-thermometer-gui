@@ -78,31 +78,31 @@ router.post('/temperature', (request, response) => {
         temperature : temp,
         timeStamp : new Date()
     }
-
-    response.send("Adding temperature = " + temp + " to the database.")
+    // TESTING PURPOSES ONLY
+    // response.send("Adding temperature = " + temp + " to the database.")
     
-    // // Check if temperature is within the acceptable range
-    // if( temperatureRecord.temperature >= minTemperature && temperatureRecord.temperature <= maxTemperature ){
-    //     temperatureTable['temperatures'].push(temperatureRecord)
-    //     statusCode = 202
-    //     message = 'Success: Added ' + temperatureRecord.temperature + " to the database."
-    // } else {
-    //     statusCode = 406
-    //     message = 'Error: Temperature must be between the ranges 10 -> 50 degress celsius'
-    // }
+    // Check if temperature is within the acceptable range
+    if( temperatureRecord.temperature >= minTemperature && temperatureRecord.temperature <= maxTemperature ){
+        temperatureTable['temperatures'].push(temperatureRecord)
+        statusCode = 202
+        message = 'Success: Added ' + temperatureRecord.temperature + " to the database."
+    } else {
+        statusCode = 406
+        message = 'Error: Temperature must be between the ranges 10 -> 50 degress celsius'
+    }
 
-    // let responseMessage = 
-    // {
-    //     httpStatusCode: statusCode,
-    //     message: message
-    // }
-    // if(statusCode == 202){
-    //     fs.writeFile(temperatureTableFileName, JSON.stringify(temperatureTable, null, 2), function(){
-    //         response.send(responseMessage)
-    //     } ) 
-    // } else{
-    //     response.send(responseMessage)
-    // }
+    let responseMessage = 
+    {
+        httpStatusCode: statusCode,
+        message: message
+    }
+    if(statusCode == 202){
+        fs.writeFile(temperatureTableFileName, JSON.stringify(temperatureTable, null, 2), function(){
+            response.send(responseMessage)
+        } ) 
+    } else{
+        response.send(responseMessage)
+    }
 })
 
 module.exports = router
