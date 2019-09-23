@@ -7,6 +7,11 @@ const appViews = 'views'
 
 const baseUrl = __dirname + '/api'
 
+// JSON file acting like a database table named 'temperature'
+var temperatureTableFileName = 'temperatures.json'
+var data = fs.readFileSync('temperatures.json')
+var temperatureTable = JSON.parse(data)
+
 router.get('/', function(request, response){
     let apiRouteDescriptions = 
     [
