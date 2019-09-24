@@ -3,6 +3,8 @@
  
 const char* ssid = "me-iphone";
 const char* password =  "abcabc123";
+String postData;
+String postVariable = "temp=";
  
 void setup() {
  
@@ -24,12 +26,13 @@ void loop() {
  
  if(WiFi.status()== WL_CONNECTED){   //Check WiFi connection status
  
-   HTTPClient http;   
+   HTTPClient http;
  
    http.begin("https://wifi-connected-thermometer-gui.herokuapp.com/api/temperature");  //Specify destination for HTTP request
    http.addHeader("Content-Type", "text/plain");             //Specify content-type header
  
-   int httpResponseCode = http.POST("temp=25");   //Send the actual POST request
+    float temperature = 25.0;
+   int httpResponseCode = http.POST("temp=" + temperature);   //Send the actual POST request
  
    if(httpResponseCode>0){
  
