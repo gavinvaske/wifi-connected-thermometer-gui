@@ -19,7 +19,7 @@ void setup() {
   }
  
   Serial.println("Connected to the WiFi network");
- 
+
 }
  
 void loop() {
@@ -29,8 +29,8 @@ void loop() {
    HTTPClient http;
  
    http.begin("https://wifi-connected-thermometer-gui.herokuapp.com/api/temperature");  //Specify destination for HTTP request
-   http.addHeader("Content-Type", "text/plain");             //Specify content-type header
- 
+   http.addHeader("Content-Type", "application/x-www-form-urlencoded");             //Specify content-type header
+    // http.addHeader("Content-Type", "text/plain");             //Specify content-type header
     float temperature = 25.0;
    int httpResponseCode = http.POST("temp=" + temperature);   //Send the actual POST request
  
