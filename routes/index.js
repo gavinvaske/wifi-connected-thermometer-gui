@@ -8,6 +8,7 @@ const appViews = '../views'
 router.use('/api', require('./api.v0.js'))
 
 router.get('/test', function(request, response){
+    response.render('test')
     response.send("This is a test!")
 })
 
