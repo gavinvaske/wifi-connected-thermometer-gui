@@ -5,12 +5,12 @@
             "alertMessages":
             {
                 "maximum" : "The temperatures is too hot.",
-                "minimum" : "The temperature is too cold.",
+                "minimum" : "The temperature is too cold."
             },
             "thresholds":
             {
                 "maximum": "50",
-                "minimum": "10",
+                "minimum": "10"
             }
         }
     ]

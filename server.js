@@ -2,10 +2,13 @@ const express = require('express')
 const path = require('path')
 const fs = require('fs')
 const bodyParser = require('body-parser')
-const app = express()
+var app = module.exports = express();
 app.set('view engine', 'pug')
-app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.static(__dirname + '/public'));
+// Example of importing
+// const sqr = require('../wifi-connected-thermometer-gui/models/test')
+// console.log(sqr.test())
 
 // Set Port Number
 var port = process.env.PORT || 3000
@@ -20,8 +23,10 @@ var server = app.listen(port, function() {
 // var data = fs.readFileSync('db/temperatures.json')
 // var temperatureTable = JSON.parse(data)
 
-app.use(require('./routes'))
+// Any /api requests go here
+app.use('/api', require('./routes'))
 
+// Homepage
 app.use('/', function(request, response){
     response.render('index', {
         title: 'Wifi Enabled Thermometer'

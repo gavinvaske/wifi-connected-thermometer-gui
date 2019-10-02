@@ -14,7 +14,7 @@
         <div id="chart"></div>
         <script>
             function drawGraph() {
-                $.getJSON('/api/all/temperatures', function(data) {
+                $.getJSON('/api/temperatures', function(data) {
                     // Display Temperatures stored in DB as HTML for development purposes
                     // document.getElementById('dataPoints').innerHTML = JSON.stringify(data['temperatures'], null, 2);
                     let temperatureRecords = data['temperatures']
