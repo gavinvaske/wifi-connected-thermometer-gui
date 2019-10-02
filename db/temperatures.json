@@ -33,27 +33,27 @@
       "timeStamp": 1569264314916
     },
     {
-      "temperature": 0,
+      "temperature": 45,
       "timeStamp": 1569264322078
     },
     {
-      "temperature": 0,
+      "temperature": 38,
       "timeStamp": 1569264333707
     },
     {
-      "temperature": 0,
+      "temperature": 22,
       "timeStamp": 1569264399405
     },
     {
-      "temperature": 0,
+      "temperature": 30,
       "timeStamp": 1569264403908
     },
     {
-      "temperature": 0,
+      "temperature": 45,
       "timeStamp": 1569264407705
     },
     {
-      "temperature": 0,
+      "temperature": 17,
       "timeStamp": 1569264410665
     },
     {
@@ -83,86 +83,6 @@
     {
       "temperature": 35,
       "timeStamp": 1569266477628
-    },
-    {
-      "temperature": 12,
-      "timeStamp": 1570047949
-    },
-    {
-      "temperature": 13,
-      "timeStamp": 1570047955
-    },
-    {
-      "temperature": 14,
-      "timeStamp": 1570047958
-    },
-    {
-      "temperature": 15,
-      "timeStamp": 1570047961
-    },
-    {
-      "temperature": 16,
-      "timeStamp": 1570047964
-    },
-    {
-      "temperature": 17,
-      "timeStamp": 1570047966
-    },
-    {
-      "temperature": 18,
-      "timeStamp": 1570047969
-    },
-    {
-      "temperature": 19,
-      "timeStamp": 1570047972
-    },
-    {
-      "temperature": 20,
-      "timeStamp": 1570047976
-    },
-    {
-      "temperature": 21,
-      "timeStamp": 1570047979
-    },
-    {
-      "temperature": 22,
-      "timeStamp": 1570047982
-    },
-    {
-      "temperature": 49,
-      "timeStamp": 1570052288
-    },
-    {
-      "temperature": 49,
-      "timeStamp": 1570052356
-    },
-    {
-      "temperature": 49,
-      "timeStamp": 1570052357
-    },
-    {
-      "temperature": 49,
-      "timeStamp": 1570052359
-    },
-    {
-      "temperature": 49,
-      "timeStamp": 1570052360
-    },
-    {
-      "temperature": 49,
-      "timeStamp": 1570052361
-    },
-    {
-      "temperature": 47,
-      "timeStamp": 1570052364
-    },
-    {
-      "temperature": 40,
-      "timeStamp": 1570052368
-    },
-    {
-      "temperature": 38,
-      "timeStamp": 1570052375
     }
   ]
 }
