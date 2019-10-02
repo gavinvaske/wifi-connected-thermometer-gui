@@ -47,6 +47,7 @@ router.get('/', (request, response) => {
 router.post('/', (request, response) => {
     // let data = request.params
     let temp = Number(request.param('temperature-measurement'))
+    console.log("Temp == " + temp)
     // response.send('temp = ' + temp)
     let minTemperature = 10
     let maxTemperature = 50
@@ -59,7 +60,7 @@ router.post('/', (request, response) => {
     // New Row that will be added to the DB
     var temperatureRecord = {
         temperature : temp,
-        timeStamp : new Date()
+        timeStamp : Date.now() / 1000 | 0
     }
     // TESTING PURPOSES ONLY
     // response.send("Adding temperature = " + temp + " to the database.")

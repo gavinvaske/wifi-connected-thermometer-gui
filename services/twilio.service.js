@@ -8,7 +8,7 @@ const client = require('twilio')(accountSid, authToken);
 function sendText(to, body) {
     client.messages.create({
         body: body,
-        to: to,             // Text this number (Example: '+12345678901')
+        to: '+1' + to,             // Text this number (Example: '+12345678901')
         from: '+12512610293'      // From a valid Twilio number 
     })
     .then((message) => console.log(message.sid));

@@ -1,3 +1,3 @@
-class temperaturesService {
+function getTemperatures(){
 
 }

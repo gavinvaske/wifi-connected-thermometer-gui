@@ -5,22 +5,28 @@ const settingsTableName = 'db/settings.json'
 const settingsSchema = schema({
     phoneNumber: {
         type: String,
-        validate: {
-            validator: function(v) {
-              return /\d{3}-\d{3}-\d{4}/.test(v);
-            },
-            message: props => `${props.value} is not a valid phone number!`
-          },
         required: [true, 'User phone number required']
     },
-    alertMessages: {
-        type: [String],
-        required: [true, 'alert messages must be defined']
+    maxAlertMessage: {
+        type: String,
+        required: [true, 'maximum alert message must be defined']
     },
-    thresholds: {
-        type: [String],
-        required: [true, 'thresholds must be defined']
+    minAlertMessage: {
+        type: String,
+        required: [true, 'minimum alert message must be defined']
     },
+    maxThreshold: {
+        type: String,
+        required: [true, 'maximum threshold must be defined']
+    },
+    minThreshold: {
+        type: String,
+        required: [true, 'minimum threshold must be defined']
+    },
+    temperatureScale: {
+        type: Number,
+        required: [true, 'The temperature scale must be defined']
+    }
 })
 
 // Get ALL settings stored in DB
@@ -32,7 +38,7 @@ function getData(){
     })
 }
 
-function updateData(data){
+async function updateData(data){
     let parsedRequest = settingsSchema.parse(data)
     // Parse the request for the parameters we are looking for
     let settingsModel = await settingsSchema.validate(parsedRequest)
@@ -45,3 +51,12 @@ function updateData(data){
         if (error) throw error
     })
 }
+
+// (async function validateData(data){
+//     let parsedRequest = settingsSchema.parse(data)
+//     // Parse the request for the parameters we are looking for
+//     let validatedSettings = await settingsSchema.validate(parsedRequest)
+//     return validatedSettings
+// })().catch( error => { console.error(error)})
+
+exports.settingsSchema = settingsSchema

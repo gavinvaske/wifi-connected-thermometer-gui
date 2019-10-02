@@ -1,18 +1,8 @@
 {
-    "settings": [
-        {
-            "phoneNumber": "5159717560",
-            "alertMessages":
-            {
-                "maximum" : "The temperatures is too hot.",
-                "minimum" : "The temperature is too cold."
-            },
-            "thresholds":
-            {
-                "maximum": "50",
-                "minimum": "10"
-            }
-        }
-    ]
-
+  "phoneNumber": "5159717560",
+  "maxAlertMessage": "ITS HOTTT",
+  "minAlertMessage": "ITS COLLDD",
+  "maxThreshold": "45",
+  "minThreshold": "25",
+  "temperatureScale": 1
 }
