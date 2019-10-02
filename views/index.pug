@@ -1,0 +1,93 @@
+extends default
+
+block content
+  .wrapper
+    #chart
+    script.
+      function drawGraph() {
+        $.getJSON('/api/all/temperatures', function(data) { 
+          // Display Temperatures stored in DB as HTML for development purposes
+          // document.getElementById('dataPoints').innerHTML = JSON.stringify(data['temperatures'], null, 2);
+          let temperatureRecords = data['temperatures']
+          let temperatureDataPoints = []
+          let timeDataPoints = []
+          let startIndex = 0
+          let numDataPoints = temperatureRecords.length
+          if (numDataPoints > 300) {
+            startIndex = (numDataPoints - 299)
+            temperatureRecords = temperatureRecords.slice(startIndex)
+          }
+          temperatureRecords.forEach((temperatureRecord, index) => {
+            timeDataPoints.push(index)
+            temperatureDataPoints.push(temperatureRecord.temperature)
+          });
+          var layout = {
+            title: 'Tempeature Measurements',
+            xaxis: {
+              title: 'Seconds Ago (Seconds)',
+              range: [0, 300],
+              showgrid: false,
+              zeroline: false
+            },
+            yaxis: {
+              title: 'Temperature (Celsius)',
+              range: [10, 50],
+              showline: false
+            }
+          };
+          var data = [{
+            x: timeDataPoints,
+            y: temperatureDataPoints,
+            type: 'line'
+          }];
+          var graphDiv = document.getElementById('chart')
+          Plotly.react(graphDiv, data, layout);
+        });
+      }
+      // Redraw Graph every 1000 milliseconds
+      setInterval(function() {
+        drawGraph()
+      }, 1000);
+  
+  ///////////////////  
+  // SETTINGS FORM //
+  ///////////////////
+
+  #settings.center(class='text-align:')
+    form.form-horizontal
+      fieldset
+        // Form Name
+        legend.center(class='align:') Settings
+        // Text input
+        .form-group
+          label.col-md-4.control-label(for='phone_number') Phone Number
+          .col-md-4
+            input#phone_number.form-control.input-md(name='phone_number' type='text' placeholder='515-555-5555' required='')
+            span.help-block hint
+        // Textarea
+        .form-group
+          label.col-md-4.control-label(for='max_temp_alert_message') Alert Message (Max)
+          .col-md-4
+            textarea#max_temp_alert_message.form-control(name='max_temp_alert_message')
+        // Textarea
+        .form-group
+          label.col-md-4.control-label(for='minimum_temp_alert_message') Alert Message (Minimum)
+          .col-md-4
+            textarea#minimum_temp_alert_message.form-control(name='minimum_temp_alert_message')
+        // Password input
+        .form-group
+          label.col-md-4.control-label(for='max_temp') Threshold (Max Temp.)
+          .col-md-4
+            input#max_temp.form-control.input-md(name='max_temp' type='password' placeholder='50' required='')
+            span.help-block hint
+        // Password input
+        .form-group
+          label.col-md-4.control-label(for='minimum_temp') Threshold (Minimum Temp.)
+          .col-md-4
+            input#minimum_temp.form-control.input-md(name='minimum_temp' type='password' placeholder='10' required='')
+            span.help-block hint
+        // Button
+        .form-group
+          label.col-md-4.control-label(for='submit') Save Settings
+          .col-md-4
+            button#submit.btn.btn-success(name='submit') Save

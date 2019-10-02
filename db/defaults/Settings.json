@@ -1,0 +1,18 @@
+{
+    "settings": [
+        {
+            "phoneNumber": "5159717560",
+            "alertMessages":
+            {
+                "maximum" : "The temperatures is too hot.",
+                "minimum" : "The temperature is too cold.",
+            },
+            "thresholds":
+            {
+                "maximum": "50",
+                "minimum": "10",
+            }
+        }
+    ]
+
+}

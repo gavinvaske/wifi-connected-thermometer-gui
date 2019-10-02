@@ -5,8 +5,7 @@ const bodyParser = require('body-parser')
 const app = express()
 app.set('view engine', 'pug')
 app.use(bodyParser.urlencoded({ extended: true }))
-const appViews = 'views'
-app.use(express.static(appViews))
+app.use(express.static(__dirname + '/public'));
 
 // Set Port Number
 var port = process.env.PORT || 3000
@@ -17,18 +16,16 @@ var server = app.listen(port, function() {
 })
 
 // JSON file acting like a database table named 'temperature'
-var temperatureTableFileName = 'temperatures.json'
-var data = fs.readFileSync('temperatures.json')
-var temperatureTable = JSON.parse(data)
-
-// app.get('/', function(request, response){
-//     return response.redirect('')
-// })
+// var temperatureTableFileName = 'temperatures.json'
+// var data = fs.readFileSync('db/temperatures.json')
+// var temperatureTable = JSON.parse(data)
 
 app.use(require('./routes'))
 
 app.use('/', function(request, response){
-    response.render('index', {root : path.join(__dirname, appViews)})
+    response.render('index', {
+        title: 'Wifi Enabled Thermometer'
+    })
 })
 
 app.use((req, resp) => {

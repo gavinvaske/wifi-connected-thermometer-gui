@@ -9,7 +9,7 @@ const baseUrl = __dirname + '/api'
 
 // JSON file acting like a database table named 'temperature'
 var temperatureTableFileName = 'temperatures.json'
-var data = fs.readFileSync('temperatures.json')
+var data = fs.readFileSync('db/' + temperatureTableFileName)
 var temperatureTable = JSON.parse(data)
 
 router.get('/', function(request, response){
@@ -29,7 +29,7 @@ router.get('/', function(request, response){
 
 // GET all stored temperature readings
 router.get('/all/temperatures', (request, response) => {
-    fs.readFile('temperatures.json', (err, data) => {
+    fs.readFile('db/' + temperatureTableFileName, (err, data) => {
         if (err) throw err;
         let temps = JSON.parse(data)
         response.send(temps)
