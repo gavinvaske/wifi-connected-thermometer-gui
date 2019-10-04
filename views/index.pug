@@ -12,9 +12,9 @@ block content
           let temperatureDataPoints = []
           let timeDataPoints = []
           let startIndex = 0
-
+          let latestTemperatureRecord = temperatureRecords[temperatureRecords.length - 1]
           // If the last value in the database is older then 1 second ago
-          if(temperatureRecords[temperatureRecords.length - 1].timeStamp < (Math.floor(Date.now() / 1000) - 1 || temperatureRecords.length == 0)){
+          if(latestTemperatureRecord.timeStamp < (Math.floor(Date.now() / 1000) - 1 || temperatureRecords.length == 0)){
             $.ajax({
               type: 'POST',
               url: '/api/temperatures/blank',
@@ -24,8 +24,45 @@ block content
               },
               dataType: 'json'
             });
-            
           }
+          
+          $.ajax({
+            type: 'GET',
+            url: '/api/settings',
+            data: JSON.stringify( {} ),
+            success: function(settings){
+              let minThreshold = Number(settings.minThreshold)
+              let maxThreshold = Number(settings.maxThreshold)
+              // Do nothing upon completion
+              let latestTemp = Number(latestTemperatureRecord.temperature)
+              // IF temp is tooo HOT
+              if(latestTemp > maxThreshold && latestTemp != 0 && !isNaN(latestTemp) && !isNaN(maxThreshold) ){
+                $.ajax({
+                  type: 'POST',
+                  url: '/api/twilio/alerts',
+                  data: {'alertType' : 1},
+                  success: function(data){
+                      // Do nothing upon completion
+                  },
+                  dataType: 'json'
+                });
+              }
+              // IF temp is tooo COLD
+              if(latestTemp < minThreshold && latestTemp != 0 && !isNaN(latestTemp) && !isNaN(minThreshold) ){
+                $.ajax({
+                  type: 'POST',
+                  url: '/api/twilio/alerts',
+                  data: {'alertType' : 0},
+                  success: function(data){
+                      // Do nothing upon completion
+                  },
+                  dataType: 'json'
+                });
+              }
+            },
+            dataType: 'json'
+          });
+
           temperatureRecords = temperatureRecords.slice(-300)
           temperatureRecords.forEach((temperatureRecord, index) => {
             timeDataPoints.push(index)
@@ -136,7 +173,7 @@ block content
             .form-group.center
               label.col-md-6.control-label(for='button1id') Power Buttons
               .col-md-6.center
-                button#button-on.btn.btn-success(name='button-on') ON
-                button#button-off.btn.btn-danger(name='button-off') OFF
+                button#button-on.btn.btn-success(name='button-on' value='1') ON
+                button#button-off.btn.btn-danger(name='button-off' value='1') OFF
 
 

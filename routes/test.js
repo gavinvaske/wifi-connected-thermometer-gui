@@ -14,7 +14,13 @@ const tempSchema = schema({
 
 
 router.use('/', function(request, response){
-  response.send('You clicked a button! ' + JSON.stringify(request.body))
+  if(request.param('button-on') != null){
+    response.send("You clicked ON!!!")
+  } 
+  if(request.param('button-off') != null){
+    response.send('You clicked OFF!!!')
+  }
+  response.send('IDK what button you pressed')
   // // New Row that will be added to the DB
   // var temperatureRecord = {
   //   temperature : 0,
