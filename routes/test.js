@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const twilioService = require('../services/twilio.service')
 const TemperatureModel = require('../models/temperature.model')
+const fs = require('fs')
 
 const schema = require('schm')
 const { validate } = schema
@@ -13,11 +14,30 @@ const tempSchema = schema({
 
 
 router.use('/', function(request, response){
-    fs.readFile('db/temperatures.json', (err, data) => {
-        if (err) throw err;
-        let jsonData = JSON.parse(data)
-        return jsonData
-      })
+  // New Row that will be added to the DB
+  var temperatureRecord = {
+    temperature : 0,
+    timeStamp : Date.now() / 1000 | 0 // Get current time in seconds
+  }
+  fs.readFile('db/temperatures.json', (err, data) => {
+    if (err) response.send(false);
+    let temperaturesTable = JSON.parse(data)
+    temperaturesTable['temperatures'].push(temperatureRecord)
+    fs.writeFile('db/temperatures.json', JSON.stringify(temperaturesTable, null, 2), function(){
+        response.send(true)
+    }) 
+  })
+
+
+
+      // fs.writeFile('db/temperatures.json', JSON.stringify(temperaturesTable, null, 2), function(){
+      //   response.send(responseMessage)
+      // }) 
+    // fs.readFile('db/temperatures.json', (err, data) => {
+    //     if (err) throw err;
+    //     let jsonData = JSON.parse(data)
+    //     return jsonData
+    //   })
 
 
     // let data = {

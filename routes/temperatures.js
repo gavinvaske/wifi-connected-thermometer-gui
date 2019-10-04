@@ -84,6 +84,7 @@ router.post('/', (request, response) => {
         fs.readFile(temperatureTableFileName, (err, data) => {
             if (err) throw err;
             let temperaturesTable = JSON.parse(data)
+            temperaturesTable['temperatures'] = temperaturesTable['temperatures'].slice(-299)   // Grab 299 records from DB (300 max is allowed and we are about to add 1)
             temperaturesTable['temperatures'].push(temperatureRecord)
             fs.writeFile(temperatureTableFileName, JSON.stringify(temperaturesTable, null, 2), function(){
                 response.send(responseMessage)

@@ -12,11 +12,21 @@ block content
           let temperatureDataPoints = []
           let timeDataPoints = []
           let startIndex = 0
-          let numDataPoints = temperatureRecords.length
-          if (numDataPoints > 300) {
-            startIndex = (numDataPoints - 299)
-            temperatureRecords = temperatureRecords.slice(startIndex)
+
+          // If the last value in the database is older then 1 second ago
+          if(temperatureRecords[temperatureRecords.length - 1].timeStamp < (Math.floor(Date.now() / 1000) - 1 || temperatureRecords.length == 0)){
+            $.ajax({
+              type: 'POST',
+              url: '/api/test',
+              data: {},
+              success: function(data){
+                  // Do nothing upon completion
+              },
+              dataType: 'json'
+            });
+            
           }
+          temperatureRecords = temperatureRecords.slice(-300)
           temperatureRecords.forEach((temperatureRecord, index) => {
             timeDataPoints.push(index)
             temperatureDataPoints.push(temperatureRecord.temperature)
@@ -51,7 +61,7 @@ block content
           };
           var data = [{
             x: timeDataPoints,
-            y: temperatureDataPoints,
+            y: temperatureDataPoints.reverse(),
             hovertemplate: 'Temp.: %{y:.2f}<extra></extra>',
             type: 'line',
             fill: 'tozeroy',
