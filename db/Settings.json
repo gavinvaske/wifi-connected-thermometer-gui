@@ -1,8 +1,8 @@
 {
-  "phoneNumber": "5159717560",
-  "maxAlertMessage": "ITS HOTTTTT",
-  "minAlertMessage": "ITS COLDDDDD",
-  "maxThreshold": "50",
+  "phoneNumber": "3193336850",
+  "maxAlertMessage": "Its on fire",
+  "minAlertMessage": "Its freezing",
+  "maxThreshold": "48",
   "minThreshold": "10",
   "temperatureScale": 1
 }
