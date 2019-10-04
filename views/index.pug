@@ -17,8 +17,8 @@ block content
           if(temperatureRecords[temperatureRecords.length - 1].timeStamp < (Math.floor(Date.now() / 1000) - 1 || temperatureRecords.length == 0)){
             $.ajax({
               type: 'POST',
-              url: '/api/test',
-              data: {},
+              url: '/api/temperatures/blank',
+              data: JSON.stringify( {'temperature-measurement' : 0} ),
               success: function(data){
                   // Do nothing upon completion
               },
@@ -75,7 +75,6 @@ block content
       setInterval(function() {
         drawGraph()
       }, 1000);
-  
   ///////////////////  
   // SETTINGS FORM //
   ///////////////////
@@ -112,11 +111,6 @@ block content
               label.col-md-4.control-label(for='minimum_temp') Threshold (Minimum Temp.)
               .col-md-4
                 input#minimum_temp.form-control.input-md(name='minThreshold' type='text' placeholder='10' required='')
-            // Button
-            .form-group
-              label.col-md-4.control-label(for='powerButton') Power Button
-              .col-md-4
-                button#powerButton.btn.btn-danger(name='powerButton') ON / OFF
             // Select Basic
             .form-group
               label.col-md-4.control-label(for='temperatureScale') Temperature Scale
@@ -134,5 +128,15 @@ block content
               label.col-md-4.control-label(for='submit') Save Settings
               .col-md-4
                 button#submit.btn.btn-success(name='submit') Save
+        form(method='POST' action='/api/test').form-horizontal
+          fieldset.center
+            // Form Name
+            legend(align='center').bg-primary.h1 Control Panel
+            // Button (Double)
+            .form-group.center
+              label.col-md-6.control-label(for='button1id') Power Buttons
+              .col-md-6.center
+                button#button-on.btn.btn-success(name='button-on') ON
+                button#button-off.btn.btn-danger(name='button-off') OFF
 
 

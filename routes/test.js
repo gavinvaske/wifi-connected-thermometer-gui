@@ -14,19 +14,20 @@ const tempSchema = schema({
 
 
 router.use('/', function(request, response){
-  // New Row that will be added to the DB
-  var temperatureRecord = {
-    temperature : 0,
-    timeStamp : Date.now() / 1000 | 0 // Get current time in seconds
-  }
-  fs.readFile('db/temperatures.json', (err, data) => {
-    if (err) response.send(false);
-    let temperaturesTable = JSON.parse(data)
-    temperaturesTable['temperatures'].push(temperatureRecord)
-    fs.writeFile('db/temperatures.json', JSON.stringify(temperaturesTable, null, 2), function(){
-        response.send(true)
-    }) 
-  })
+  response.send('You clicked a button! ' + JSON.stringify(request.body))
+  // // New Row that will be added to the DB
+  // var temperatureRecord = {
+  //   temperature : 0,
+  //   timeStamp : Date.now() / 1000 | 0 // Get current time in seconds
+  // }
+  // fs.readFile('db/temperatures.json', (err, data) => {
+  //   if (err) response.send(false);
+  //   let temperaturesTable = JSON.parse(data)
+  //   temperaturesTable['temperatures'].push(temperatureRecord)
+  //   fs.writeFile('db/temperatures.json', JSON.stringify(temperaturesTable, null, 2), function(){
+  //       response.send(true)
+  //   }) 
+  // })
 
 
 
