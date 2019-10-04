@@ -6,7 +6,7 @@ block content
     script.
       function drawGraph() {
         $.getJSON('/api/temperatures', function(data) { 
-          // Display Temperatures stored in DB as HTML for development purposes
+          // Display Temperatures stored in DB as HTML for development purposes.
           // document.getElementById('dataPoints').innerHTML = JSON.stringify(data['temperatures'], null, 2);
           let temperatureRecords = data['temperatures']
           let temperatureDataPoints = []
@@ -26,44 +26,6 @@ block content
               dataType: 'json'
             });
           }
-
-           $.ajax({
-            type: 'GET',
-            url: '/api/settings',
-            data: JSON.stringify( {} ),
-            success: function(settings){
-              let minThreshold = Number(settings.minThreshold)
-              let maxThreshold = Number(settings.maxThreshold)
-              // Do nothing upon completion
-              let latestTemp = Number(latestTemperatureRecord.temperature)
-              // IF temp is tooo HOT
-              if(latestTemp > maxThreshold && latestTemp != 0 && !isNaN(latestTemp) && !isNaN(maxThreshold) ){
-                $.ajax({
-                  type: 'POST',
-                  url: '/api/twilio/alerts',
-                  data: {'alertType' : 1},
-                  success: function(data){
-                      // Do nothing upon completion
-                  },
-                  dataType: 'json'
-                });
-              }
-              // IF temp is tooo COLD
-              if(latestTemp < minThreshold && latestTemp != 0 && !isNaN(latestTemp) && !isNaN(minThreshold) ){
-                $.ajax({
-                  type: 'POST',
-                  url: '/api/twilio/alerts',
-                  data: {'alertType' : 0},
-                  success: function(data){
-                      // Do nothing upon completion
-                  },
-                  dataType: 'json'
-                });
-              }
-            },
-            dataType: 'json'
-          });
-
 
           temperatureRecords = temperatureRecords.slice(-300)
           temperatureRecords.forEach((temperatureRecord, index) => {
